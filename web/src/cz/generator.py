@@ -77,7 +77,10 @@ def set_target_root(path):
 
 def generate():
 	for path in _queued_documents:
-		_translate_document(path)
+		try:
+			_translate_document(path)
+		except Exception as e:
+			print(e)
 	_clean()
 	_queued_documents.clear()
 
