@@ -1,0 +1,26 @@
+    <!--#let: navbar_data=6*[""]-->
+    <!--#let: navbar_data[navbar_id]="active"-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="navbar-header active">
+            <a class="navbar-brand" href=<!--#eval: link("uvod")-->>Náboj Junior Organizátori</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="<!--#eval: navbar_data[5]-->">
+                <a href=<!--#eval: link("pridajmiesto")-->>Pridaj miesto</a>
+              </li>
+              <li class="<!--#eval: navbar_data[2]-->">
+                <a href=<!--#eval: link("pridajulohu")-->>Navrhni úlohu</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="<!--#get: sk_root-->">Náboj Junior</a></li>
+              <li><a href="http://trojsten.sk/" target="_blank">Trojsten</a></li>
+              <!-- <li><a href="http://fykos.cz/" target="_blank">Fykos</a></li> -->
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>

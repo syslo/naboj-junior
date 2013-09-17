@@ -1,0 +1,59 @@
+    <!--#let: navbar_data=6*[""]-->
+    <!--#let: navbar_data[navbar_id]="active"-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="navbar-header active">
+            <a class="navbar-brand" href=<!--#eval: link("uvod")-->>Náboj Junior</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="<!--#eval: navbar_data[1]--> dropdown">
+                <a href=<!--#eval: link("onaboji")--> class="dropdown-toggle" data-toggle="dropdown">
+                  O náboji<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href=<!--#eval: link("onaboji")-->>základné info</a></li>
+                  <li><a href=<!--#eval: link("onaboji/pravidla")-->>pravidlá</a></li>
+                  <li><a href=<!--#eval: link("onaboji/harmonogram")-->>harmonogram súťaže</a></li>
+                </ul>
+              </li>
+              <li class="<!--#eval: navbar_data[5]-->">
+                <a href=<!--#eval: link("miesta")-->>Kde bude?</a>
+              </li>
+              <li class="<!--#eval: navbar_data[2]-->">
+                <a href=<!--#eval: link("registracia")-->>Registrácia</a>
+              </li>
+              <li class="<!--#eval: navbar_data[3]--> dropdown">
+                <a href=<!--#eval: link("akopomoct")--> class="dropdown-toggle" data-toggle="dropdown">
+                  Chcem pomôcť<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class=><a href=<!--#eval: link("akopomoct")-->><b>A kto si?</b></a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">stredná škola</li>
+                  <li><a href=<!--#eval: link("akopomoct/ss-ziak")-->>žiak</a></li>
+                  <li><a href=<!--#eval: link("akopomoct/ss-ucitel")-->>učiteľ</a></li>
+                  <li><a href=<!--#eval: link("akopomoct/ss-skola")-->>škola</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">základná škola</li>
+                  <li><a href=<!--#eval: link("akopomoct/zs-ucitel")-->>učiteľ</a></li>
+                  <li><a href=<!--#eval: link("akopomoct/zs-skola")-->>škola</a></li>
+                  <li class="divider"></li>
+                  <li><a href=<!--#eval: link("akopomoct/firma")-->>firma</a></li>
+                  <li><a href=<!--#eval: link("akopomoct/nadsenec")-->>nadšenec</a></li>
+                </ul>
+              </li>
+              <li class="<!--#eval: navbar_data[4]-->">
+                <a href=<!--#eval: link("kontakt")-->>Kontakt</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="<!--#get: cz_root-->">MFnáboj (česká verze)</a></li>
+              <li><a href="http://trojsten.sk/" target="_blank">Trojsten</a></li>
+              <!-- <li><a href="http://fykos.cz/" target="_blank">Fykos</a></li> -->
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>

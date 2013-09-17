@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--#python: /.constants.py-->
+<html lang="en">
+  <!--#include: /.head.htm-->
+  <body>
+
+    <!--#let: navbar_id=4--><!--#template: /.navbar.htm-->
+
+    <div class="container container-main">
+
+      <div class="page-header">
+        <h1>Kontakt</h1>
+      </div>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <!--#include: /.kontakt.sk.htm-->
+          </div>
+          <div class="col-lg-6" id="czkontakt"></div>
+        </div>
+      </div>
+
+      <!--#include: /.foot.htm-->
+
+    </div>
+
+    <!--#include: /.import_javascript.htm-->
+    <script type="text/javascript">
+      $('#czkontakt').load('<!--#get: cz_root-->.kontakt.cz.htm');
+    </script>
+
+  </body>
+</html>

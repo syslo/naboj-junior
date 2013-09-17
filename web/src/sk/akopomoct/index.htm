@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--#python: /.constants.py-->
+<html lang="en">
+  <!--#include: /.head.htm-->
+  <body>
+
+    <!--#let: navbar_id=3--><!--#template: /.navbar.htm-->
+
+    <div class="container container-main">
+      
+      <div class="jumbotron">
+        <div class="container" style="text-align: center;">
+          <h2>Chcem pomôcť, čo robiť?</h2>
+          <br/>
+          <h3>To závisí od toho, kto si ...</h3>
+          <br/>
+          <table style="text-align: center; table-layout: fixed; width: 80%; margin: 0 auto">
+            <tr>
+              <td></td>
+              <td> <a class="btn btn-primary" href=<!--#eval: link("akopomoct/ss-ziak")-->>žiak</a></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="arrow">&#8593;</td>
+              <td> <a class="btn btn-primary btn-large" href=<!--#eval: link("akopomoct/ss-ziak")-->>firma</a></td>
+            </tr>
+            <tr>
+              <td> <a class="btn btn-primary btn-large" href=<!--#eval: link("akopomoct/zs-skola")-->>základná<br/>škola</a></td>
+              <td> <a class="btn btn-primary btn-large" href=<!--#eval: link("akopomoct/ss-skola")-->>stredná<br/>škola</a></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="arrow">&#8595;</td>
+              <td class="arrow">&#8595;</td>
+              <td> <a class="btn btn-primary btn-large" href=<!--#eval: link("akopomoct/ss-ziak")-->>iný nadšenec</a></td>
+            </tr>
+            <tr>
+              <td> <a class="btn btn-primary" href=<!--#eval: link("akopomoct/zs-ucitel")-->>učiteľ</a></td>
+              <td> <a class="btn btn-primary" href=<!--#eval: link("akopomoct/zs-ucitel")-->>učiteľ</a></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!--#include: /.foot.htm-->
+
+    </div>
+
+    <!--#include: /.import_javascript.htm-->
+
+  </body>
+</html>
