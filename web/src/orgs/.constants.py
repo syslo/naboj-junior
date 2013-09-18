@@ -1,9 +1,14 @@
-sk_root = "http://naboj-junior.fks.sk/"
-orgs_root = "http://naboj-junior.fks.sk/orgs/"
-cz_root = "http://naboj-junior.fks.sk/cz/"
+import roots as r
+sk_root = r.sk_root
+cz_root = r.cz_root
+orgs_root = r.orgs_root
+del r
+
 root = orgs_root
 link_data = {
 	"uvod": "index",
+	"akopomoct": "akopomoct/index",
+	"onaboji": "onaboji/index"
 }
 
 def link(target):
