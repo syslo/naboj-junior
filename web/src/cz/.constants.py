@@ -5,13 +5,17 @@ orgs_root = r.orgs_root
 del r
 
 root = cz_root
+
 link_data = {
-	"uvod": "index",
-	"akopomoct": "akopomoct/index",
-	"onaboji": "onaboji/index"
+	"uvod": "index.html",
+	"akopomoct": "akopomoct/index.html",
+	"onaboji": "onaboji/index.html",
+	"registracia": "registracia.php",
 }
 
 def link(target):
 	if target in link_data:
 		target = link_data[target]
-	return '"'+root+target+'.html"'
+	else:
+		target = target+'.html'
+	return '"'+root+target+'"'
