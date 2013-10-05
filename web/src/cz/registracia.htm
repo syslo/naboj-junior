@@ -118,7 +118,7 @@
                   id="typ_skoly"
                 >
                   <option value=-1>-- Vyberte si --</option>
-                  <option value=0>Základná škola</option>
+                  <option value=0>Základní škola</option>
                   <option value=1>Gymnázium</option>
                 </select>
               </div>
@@ -163,7 +163,7 @@
               $errors[$i] = 'Nesmie byť prázdne.';
             }
           }
-          $required_select = array('miesto_id', 'typ_skoly', 'obedov');
+          $required_select = array('miesto_id', 'typ_skoly');
           foreach ($required_select as $i){
             if($safe_data[$i] == "-1"){
               $errors[$i] = 'Zvolte nieco';
