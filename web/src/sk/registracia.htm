@@ -6,21 +6,219 @@
 
     <!--#let: navbar_id=2--><!--#template: /.navbar.htm-->
 
-    <div class="container container-main">
+    <<div class="container container-main">
       
-      <div class="jumbotron">
-        <div class="container">
-          <p>
-            Registrovať sa bude možné od <b>1. októbra</b>,
-            kedy bude kompletný zoznam organizačných miest.
-            Môžete si však nastaviť e-mailovú pripomienku,
-            ktorá Vám príde pri spustení registrácie.
-          </p>
-        </div>
+      <div class="page-header">
+        <h1>Registrácia</h1>
       </div>
 
-      <iframe src="https://docs.google.com/forms/d/1oAAa-f0tLNYgN7cUN4v33I6umFXzoMxdZpv5LA20DRc/viewform?embedded=true" width="760" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+      <?php
+        // Connect to Database and Set constants
 
+        $server = 'localhost';
+        $user = 'n_junior_edit';
+        $pass = 'chudak';
+        $db = 'naboj_junior';
+         
+        $connection = mysql_connect($server, $user, $pass) 
+        or die ("Could not connect to server ... \n" . mysql_error ());
+        mysql_select_db($db) 
+        or die ("Could not connect to database ... \n" . mysql_error ());
+
+        mysql_query ("set character_set_results='utf8'"); 
+
+        $long_names = array(
+          "Názov tímu",
+          "Názov a adresa školy",
+          "Meno 1. súťažiaceho",
+          "Meno 2. súťažiaceho",
+          "Meno 3. súťažiaceho",
+          "Meno 4. súťažiaceho",
+          "Kontaktná osoba",
+          "Kontaktný e-mail",
+          "Poznámka"
+        );
+
+        $short_names = array(
+          "nazov",
+          "skola",
+          "clen1",
+          "clen2",
+          "clen3",
+          "clen4",
+          "kontakt",
+          "mail",
+          "poznamka",
+        );
+      ?>
+
+      <?php function renderForm($old_data,$errors){ ?>
+
+        <form action="" method="post" class="form-horizontal" role="form">
+
+          <div class="form-group <?php if(array_key_exists('miesto_id',$errors)) {echo 'has-error';} ?>">
+            <label
+              for="miesto_id"
+              class="col-lg-3 control-label"
+            >
+              Miesto
+            </label>
+            <div class="col-lg-9">
+              <select
+                class="form-control"
+                name="miesto_id"
+                id="miesto_id"
+              >
+                <option value=-1>-- Vyberte si --</option>
+                <?php
+                  $result = mysql_query("SELECT * FROM miesta WHERE krajina = 'sk'") or die(mysql_error());
+                ?>
+                <?php while($row = mysql_fetch_array( $result )){ ?>
+                  <option value=<?php echo $row["id"]; ?>><?php echo $row["mesto"]; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+
+          <hr/>
+
+          <?php global $long_names, $short_names; ?>
+
+          
+          <?php for ($i = 0; $i < count($long_names); $i++){ ?>
+            <div class="form-group <?php if(array_key_exists($short_names[$i],$errors)) {echo 'has-error';} ?>">
+              <label
+                for="<?php echo $short_names[$i]; ?>"
+                class="col-lg-3 control-label"
+              >
+                <?php echo $long_names[$i]; ?>
+              </label>
+              <div class="col-lg-9">
+                <input
+                  class="form-control"
+                  name="<?php echo $short_names[$i]; ?>"
+                  id="<?php echo $short_names[$i]; ?>"
+                  value="<?php if(array_key_exists($short_names[$i],$old_data)) {echo $old_data[$short_names[$i]];} ?>"
+                >
+              </div>
+            </div>
+            <?php if($i == 1){ ?>
+
+            <div class="form-group <?php if(array_key_exists('typ_skoly',$errors)) {echo 'has-error';} ?>">
+              <label
+                for="typ_skoly"
+                class="col-lg-3 control-label"
+              >
+                Typ školy
+              </label>
+              <div class="col-lg-9">
+                <select
+                  class="form-control"
+                  name="typ_skoly"
+                  id="typ_skoly"
+                >
+                  <option value=-1>-- Vyberte si --</option>
+                  <option value=0>Základná škola</option>
+                  <option value=1>Gymnázium</option>
+                </select>
+              </div>
+            </div>
+
+            <?php } ?>
+            <?php if($i == 1 or $i == 5 or $i == 7){ echo "<hr/>";} ?>
+          <?php } ?>
+          <div class="form-group <?php if(array_key_exists('obedov',$errors)) {echo 'has-error';} ?>">
+            <label
+              for="obedov"
+              class="col-lg-3 control-label"
+            >
+              Objednávam si
+            </label>
+            <div class="col-lg-9">
+              <select
+                class="form-control"
+                name="obedov"
+                id="obedov"
+              >
+                <option value=-1>-- Vyberte si --</option>
+                <option value=0>0 obedov.</option>
+                <option value=1>1 obed za 1,50 €.</option>
+                <option value=2>2 obedy za 3,00 €.</option>
+                <option value=3>3 obedy za 4,50 €.</option>
+                <option value=4>4 obedy za 6,00 €.</option>
+                <option value=5>5 obedov za 7,50 €.</option>
+                <option value=6>6 obedov za 9,00 €.</option>
+                <option value=7>7 obedov za 10,50 €.</option>
+                <option value=8>8 obedov za 12,00 €.</option>
+              </select>
+            </div>
+          </div>
+          <hr/>
+          <div class="form-group <?php if(array_key_exists('suhlas',$errors)) {echo 'has-error';} ?>">
+            <label for="suhlas" class="col-lg-3 control-label">
+              Potvrdenie
+            </label>
+            <div class="col-lg-offset-3 col-lg-9">
+              <div class="checkbox">
+                <input name="suhlas" type="checkbox"> Súhlasím s pravidlami súťaže a registračným poplatkom 2 € / tím.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-offset-3 col-lg-9">
+              <button type="submit" name="submit" class="btn btn-primary">Odoslať</button>
+            </div>
+          </div>
+
+        </form>
+      <?php } ?>
+ 
+      <?php
+        if (isset($_POST['submit'])){
+          $safe_data = array();
+          $errors = array();
+
+          $to_save_args = array_merge($short_names, array('miesto_id', 'typ_skoly', 'obedov'));
+          foreach ($to_save_args as $i){
+            $safe_data[$i] = mysql_real_escape_string(htmlspecialchars($_POST[$i]));  
+          }
+
+          $required = array('nazov', 'skola', 'clen1', 'kontakt','mail');
+          foreach ($required as $i){
+            if($safe_data[$i] == ''){
+              $errors[$i] = 'Nesmie byť prázdne.';
+            }
+          }
+          $required_select = array('miesto_id', 'typ_skoly', 'obedov');
+          foreach ($required_select as $i){
+            if($safe_data[$i] == "-1"){
+              $errors[$i] = 'Zvolte nieco';
+            }
+          }
+          if (!isset($_POST['suhlas'])){
+            $errors['suhlas'] = 'Musíte suhlasit.';
+          }
+
+          if(count($errors) == 0){
+            $query = "INSERT timy SET";
+            foreach ($to_save_args as $i){
+              $query.= " ".$i."='".$safe_data[$i]."',"; 
+            }
+            $query.= "cas_prihlasenia=now()";
+
+            mysql_query($query)
+            or die(mysql_error());
+            
+            header("Location: <!--#eval: link('registracia-ok')-->"); 
+
+          } else {
+            renderForm($safe_data,$errors);
+          }
+          
+        } else {
+          renderForm(array(),array());
+        }
+      ?>
       <!--#include: /.foot.htm-->
 
     </div>

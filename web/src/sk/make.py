@@ -7,7 +7,8 @@ g.set_target_root(os.path.join(os.pardir,os.pardir,"www"))
 
 g.enqueue("index.htm")
 g.enqueue("kontakt.htm")
-g.enqueue("registracia.htm")
+g.enqueue("registracia.htm","registracia.php")
+g.enqueue("registracia-ok.htm")
 g.enqueue("miesta.htm")
 
 g.enqueue(os.path.join("onaboji","index.htm"))
