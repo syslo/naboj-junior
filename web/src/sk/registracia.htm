@@ -204,7 +204,7 @@
             foreach ($to_save_args as $i){
               $query.= " ".$i."='".$safe_data[$i]."',"; 
             }
-            $query.= "cas_prihlasenia=now()";
+            $query.= "cas_prihlasenia=now(),stav=2";
 
             mysql_query($query)
             or die(mysql_error());
