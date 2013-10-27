@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--#python: /.constants.py-->
+<html lang="en">
+  <!--#include: /.head.htm-->
+  <body>
+
+    <!--#let: navbar_id=2--><!--#template: /.navbar.htm-->
+
+    <div class="container container-main">
+      
+      <div class="page-header">
+        <h1>Zaregistrované tímy</h1>
+      </div>
+
+      <?php
+        // Connect to Database and Set constants
+
+        $server = 'localhost';
+        $user = 'n_junior_edit';
+        $pass = 'chudak';
+        $db = 'naboj_junior';
+         
+        $connection = mysql_connect($server, $user, $pass) 
+        or die ("Could not connect to server ... \n" . mysql_error ());
+        mysql_select_db($db) 
+        or die ("Could not connect to database ... \n" . mysql_error ());
+        mysql_set_charset("utf8");
+
+        $stav=array(
+          "zrušený",
+          "náhradník",
+          "prijatý",
+          "neurčený"
+        );
+      ?>
+
+      <?php
+        $result = mysql_query("SELECT * FROM miesta WHERE krajina = 'cz' OR krajina = 'sk' ORDER BY krajina DESC,mesto ASC") or die(mysql_error());
+      ?>
+
+      <div class="row">
+        <?php while($row = mysql_fetch_array( $result )){ ?>
+          <div class="col-lg-3">
+            <p>
+              <a class="btn btn-default" href=<?php echo '"#mesto'.$row["id"].'"';?>><?php echo $row["mesto"];?></a>
+            </p>
+          </div>
+        <?php } ?>
+      </div>
+
+      <div><p>
+        <a class="btn btn-primary btn-lg" href=<!--#eval: link("registracia")-->>Registruj sa aj ty »</a>
+      </p></div>
+
+      <?php
+        mysql_data_seek($result, 0);
+      ?>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <?php while($row = mysql_fetch_array( $result )){ ?>
+            <?php
+              $subresult = mysql_query("SELECT * FROM timy WHERE stav > 0 AND miesto_id =".$row["id"]) or die(mysql_error());
+            ?>
+            <div><p>
+              <h2 id=mesto<?php echo $row["id"];?>><?php echo $row["mesto"];?></h2>
+              <table class="table"><p>
+                <tr><th>Tím</th><th>Stav</th></tr>
+                <?php while($subrow = mysql_fetch_array( $subresult )){ ?>
+                  <tr><td><?php echo $subrow["nazov"];?></td><td><?php echo $stav[$subrow["stav"]];?></td></tr>
+                <?php } ?>
+              </p></table>
+            </p></div>
+          <?php } ?>
+        </div>
+      </div>
+
+      <!--#include: /.foot.htm-->
+
+    </div>
+
+    <!--#include: /.import_javascript.htm-->
+
+  </body>
+</html>
