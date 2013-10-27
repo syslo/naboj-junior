@@ -15,6 +15,7 @@
       <div><p>
         <a class="btn btn-primary btn-lg" href=<!--#eval: link("registracia-timy")-->>Zoznam registrovaných tímov »</a>
       </p></div>
+      <hr/>
 
       <?php
         // Connect to Database and Set constants
@@ -145,15 +146,15 @@
                 id="obedov"
               >
                 <option value=-1>-- Vyberte si --</option>
-                <option value=0>0 obedov.</option>
-                <option value=1>1 obed za 1,50 €.</option>
-                <option value=2>2 obedy za 3,00 €.</option>
-                <option value=3>3 obedy za 4,50 €.</option>
-                <option value=4>4 obedy za 6,00 €.</option>
-                <option value=5>5 obedov za 7,50 €.</option>
-                <option value=6>6 obedov za 9,00 €.</option>
-                <option value=7>7 obedov za 10,50 €.</option>
-                <option value=8>8 obedov za 12,00 €.</option>
+                <option value=0>Bez občerstvenia.</option>
+                <option value=1>1 občerstvenie za 1,50 €.</option>
+                <option value=2>2 občerstvenia za 3,00 €.</option>
+                <option value=3>3 občerstvenia za 4,50 €.</option>
+                <option value=4>4 občerstvenia za 6,00 €.</option>
+                <option value=5>5 občerstvení za 7,50 €.</option>
+                <option value=6>6 občerstvení za 9,00 €.</option>
+                <option value=7>7 občerstvení za 10,50 €.</option>
+                <option value=8>8 občerstvení za 12,00 €.</option>
               </select>
             </div>
           </div>
@@ -164,7 +165,8 @@
             </label>
             <div class="col-lg-offset-3 col-lg-9">
               <div class="checkbox">
-                <input name="suhlas" type="checkbox"> Súhlasím s pravidlami súťaže a registračným poplatkom 2 € / tím.
+                <input name="suhlas" type="checkbox"> Súhlasím s <a href=<!--#eval: link("onaboji/pravidla")-->>pravidlami súťaže</a>
+                a registračným poplatkom 2 € / tím.
               </div>
             </div>
           </div>
@@ -204,11 +206,24 @@
           }
 
           if(count($errors) == 0){
+            $stav = 3;
+            $res=mysql_query("SELECT * FROM miesta WHERE id=".$safe_data['miesto_id']) or die(mysql_error());
+            $data=mysql_fetch_assoc($res);
+            if(!is_null($data['limit'])){
+              $limit = $data['limit'];
+              $res=mysql_query("SELECT count(*) AS pocet FROM timy WHERE stav=1 AND miesto_id=".$safe_data['miesto_id']) or die(mysql_error());
+              $data=mysql_fetch_assoc($res);
+              if($data['pocet']>=$limit){
+                $stav = 1;
+              } else {
+                $stav = 2;
+              }
+            }
             $query = "INSERT timy SET";
             foreach ($to_save_args as $i){
               $query.= " ".$i."='".$safe_data[$i]."',"; 
             }
-            $query.= "cas_prihlasenia=now(),stav=2";
+            $query.= "cas_prihlasenia=now(),stav=".$stav;
 
             mysql_query($query)
             or die(mysql_error());
