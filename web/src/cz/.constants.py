@@ -11,6 +11,7 @@ link_data = {
 	"akopomoct": "akopomoct/index.html",
 	"onaboji": "onaboji/index.html",
 	"registracia": "registracia.php",
+	"registracia-timy": "registracia-timy.php",
 }
 
 def link(target):

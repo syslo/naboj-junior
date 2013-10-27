@@ -12,6 +12,11 @@
         <h1>Registrace</h1>
       </div>
 
+      <div><p>
+        <a class="btn btn-primary btn-lg" href=<!--#eval: link("registracia-timy")-->>Seznam registrovaných týmů »</a>
+      </p></div>
+      <hr/>
+
       <?php
         // Connect to Database and Set constants
 
@@ -134,7 +139,7 @@
             </label>
             <div class="col-lg-offset-3 col-lg-9">
               <div class="checkbox">
-                <input name="suhlas" type="checkbox"> Přečetl jsem si pravidla soutěže a souhlasím s nimi.
+                <input name="suhlas" type="checkbox"> Přečetl jsem si <a href=<!--#eval: link("onaboji/pravidla")-->>pravidla soutěže</a> a souhlasím s nimi.
               </div>
             </div>
           </div>
@@ -174,11 +179,24 @@
           }
 
           if(count($errors) == 0){
+            $stav = 3;
+            $res=mysql_query("SELECT * FROM miesta WHERE id=".$safe_data['miesto_id']) or die(mysql_error());
+            $data=mysql_fetch_assoc($res);
+            if(!is_null($data['limit'])){
+              $limit = $data['limit'];
+              $res=mysql_query("SELECT count(*) AS pocet FROM timy WHERE stav=1 AND miesto_id=".$safe_data['miesto_id']) or die(mysql_error());
+              $data=mysql_fetch_assoc($res);
+              if($data['pocet']>=$limit){
+                $stav = 1;
+              } else {
+                $stav = 2;
+              }
+            }
             $query = "INSERT timy SET";
             foreach ($to_save_args as $i){
               $query.= " ".$i."='".$safe_data[$i]."',"; 
             }
-            $query.= "cas_prihlasenia=now(),stav=2";
+            $query.= "cas_prihlasenia=now(),stav=".$stav;
 
             mysql_query($query)
             or die(mysql_error());
