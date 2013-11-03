@@ -32,4 +32,7 @@ for f in glob.glob(os.path.join("bootstrap","*")):
 g.include(".kontakt.sk.htm")
 g.include(".miesta.sk.htm")
 
+g.include(os.path.join("img","logo-small.png"))
+g.include(os.path.join("img","logo-big.png"))
+
 g.generate()

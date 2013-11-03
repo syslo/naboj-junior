@@ -1,15 +1,21 @@
-    <!--#let: navbar_data=6*[""]-->
+    <!--#let: navbar_data=7*[""]-->
     <!--#let: navbar_data[navbar_id]="active"-->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <div class="navbar-header active">
-            <a class="navbar-brand" href=<!--#eval: link("uvod")-->>Náboj Junior</a>
+            <a href=<!--#eval: link("uvod")--> style="margin: 0px 20px">
+              <img src="<!--#get: root-->img/logo-small.png" alt="Náboj Junior">
+            </a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+              <li class="divider"></li>
               <li class="<!--#eval: navbar_data[1]-->">
                 <a href=<!--#eval: link("onaboji/pravidla")-->>Pravidlá</a>
+              </li>
+              <li class="<!--#eval: navbar_data[6]-->">
+                <a href=<!--#eval: link("onaboji/harmonogram")-->>Harmonogram</a>
               </li>
               <li class="<!--#eval: navbar_data[5]-->">
                 <a href=<!--#eval: link("miesta")-->>Kde bude?</a>
