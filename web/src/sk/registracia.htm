@@ -211,7 +211,7 @@
             $data=mysql_fetch_assoc($res);
             if(!is_null($data['limit'])){
               $limit = $data['limit'];
-              $res=mysql_query("SELECT count(*) AS pocet FROM timy WHERE stav=1 AND miesto_id=".$safe_data['miesto_id']) or die(mysql_error());
+              $res=mysql_query("SELECT count(*) AS pocet FROM timy WHERE stav=2 AND miesto_id=".$safe_data['miesto_id']) or die(mysql_error());
               $data=mysql_fetch_assoc($res);
               if($data['pocet']>=$limit){
                 $stav = 1;
