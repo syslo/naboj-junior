@@ -11,6 +11,7 @@ g.enqueue("registracia.htm","registracia.php")
 g.enqueue("registracia-timy.htm","registracia-timy.php")
 g.enqueue("registracia-ok.htm")
 g.enqueue("miesta.htm")
+g.enqueue("materialy.htm")
 
 g.enqueue(os.path.join("onaboji","index.htm"))
 g.enqueue(os.path.join("onaboji","pravidla.htm"))
@@ -27,6 +28,12 @@ g.enqueue(os.path.join("akopomoct","firma.htm"))
 g.enqueue(os.path.join("akopomoct","nadsenec.htm"))
 
 for f in glob.glob(os.path.join("bootstrap","*")):
+	g.include(f)
+
+for f in glob.glob(os.path.join("downloads","*")):
+	g.include(f)
+
+for f in glob.glob(os.path.join("downloads","*","*")):
 	g.include(f)
 
 g.include(".kontakt.sk.htm")

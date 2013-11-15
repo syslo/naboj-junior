@@ -20,3 +20,6 @@ def link(target):
 	else:
 		target = target+'.html'
 	return '"'+root+target+'"'
+
+def download(target):
+	return '"'+sk_root+'downloads/'+target+'"'

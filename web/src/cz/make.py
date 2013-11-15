@@ -11,6 +11,7 @@ g.enqueue("registracia.htm","registracia.php")
 g.enqueue("registracia-timy.htm","registracia-timy.php")
 g.enqueue("registracia-ok.htm")
 g.enqueue("miesta.htm")
+g.enqueue("materialy.htm")
 
 g.enqueue(os.path.join("onaboji","index.htm"))
 g.enqueue(os.path.join("onaboji","pravidla.htm"))
